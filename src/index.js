@@ -15,7 +15,7 @@ module.exports = (options) => {
 	}
 
 	if(Discord.honeycordJS) {
-		console.warn(`[HoneyCord.js] HoneyCord.js was previously started!`);
+		console.warn(`[HoneyCord.js] HoneyCord.js was already started!`);
 		return false;
 	}
 
@@ -31,7 +31,7 @@ module.exports = (options) => {
 			this.index = require.resolve(`discord.js`);
 		}
 
-		// require.cache (index.exports)
+		// require.cache[index].exports
 		get_indexCache(attr) {
 			return require.cache[this.index].exports[attr];
 		}
@@ -43,6 +43,23 @@ module.exports = (options) => {
 		extend_indexCache(attr, callback) {
 			return this.set_indexCache(attr, callback(this.get_indexCache(attr)));
 		}
+
+		// require.cache[file].exports
+		get_cacheFile(file) {
+			return path.join(this.src, `${file}.js`);
+		}
+		
+		get_cache(file) {
+			return require.cache[this.get_cacheFile(file)].exports;
+		}
+
+		set_cache(file, value) {
+			return require.cache[this.get_cacheFile(file)].exports = value;
+		}
+
+		extend_cache(file, callback) {
+				return require.cache[this.get_cacheFile(file)].exports = callback(this.get_cache(file));
+	}
 
 		// Get arguments
 		getArgs(args) {
