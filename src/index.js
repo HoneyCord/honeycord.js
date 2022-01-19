@@ -9,6 +9,8 @@ module.exports = (options) => {
 		path = require(`path`),
 		Discord = require(`discord.js`);
 
+	var Discord = Object.assign({}, Discord);
+
 	// Check Discord.js version
 	if(parseInt(Discord.version) < 13) {
 		throw new Error(`[HoneyCord.js] For running HoneyCord.js, it is required to have Discord.js 13... or newer.`);
@@ -26,53 +28,53 @@ module.exports = (options) => {
 	/////////////////////////
 	class Extendables {
 		constructor() {
-			this.Discord = Discord;
 			this.src = require.resolve(`discord.js`).split(path.sep).slice(0, -1).join(path.sep);
-			this.index = require.resolve(`discord.js`);
+			this.Discord = Discord;
 		}
 
 		// require.cache[index].exports
-		get_indexCache(attr) {
-			return require.cache[this.index].exports[attr];
+		get(attr) {
+			return this.Discord[attr];
 		}
 
-		set_indexCache(attr, value) {
-			return require.cache[this.index].exports[attr] = value;
+		set(attr, value) {
+			return this.Discord[attr] = value;
 		}
 
-		extend_indexCache(attr, callback) {
-			return this.set_indexCache(attr, callback(this.get_indexCache(attr)));
+		extend(attr, callback) {
+			return this.set(attr, callback(this.get(attr)));
 		}
 
 		// require.cache[file].exports
-		get_cacheFile(file) {
-			return path.join(this.src, `${file}.js`);
+		resolve_extCache(route) {
+			return path.join(this.src, route.join(path.sep));
 		}
 		
-		get_cache(file) {
-			return require.cache[this.get_cacheFile(file)].exports;
+		get_extCache(route) {
+			var fullPath = this.resolve_extCache(route);
+
+			return require.cache[fullPath].exports;
 		}
 
-		set_cache(file, value) {
-			return require.cache[this.get_cacheFile(file)].exports = value;
+		set_extCache(route, value) {
+			var fullPath = this.resolve_extCache(route);
+
+			return require.cache[fullPath].exports = value;
 		}
 
-		extend_cache(file, callback) {
-				return require.cache[this.get_cacheFile(file)].exports = callback(this.get_cache(file));
-	}
+		extend_extCache(route, callback) {
+			return this.set_extCache(route, callback(this.get_extCache(route)));
+		}
 
 		// Get arguments
 		getArgs(args) {
 			return args.map(x => {
-				if(x._type) return;
+				if(x._type) return x;
 				
-				if(typeof x !== `object`) {
-					x = {
-						value: x,
-					};
-				}
-
-				x._type = x.constructor.name;
+				x = {
+					value: x,
+					_type: x.constructor.name,
+				};
 
 				return x;
 			});
@@ -97,11 +99,14 @@ module.exports = (options) => {
 	}
 
 	// Load patches
-	patches.forEach(patch => {
+	for(var patch of patches) {
 		options[patch] = options[patch] || true;
 
-		if(options[patch] == true) {
+		if(options[patch] == true && fs.existsSync(path.join(__dirname, `patches`, patch))) {
 			require(path.join(__dirname, `patches`, patch))(extendables);
 		}
-	});
+	}
+
+	var index = require.resolve(`discord.js`);
+	return require.cache[index].exports = Discord;
 };

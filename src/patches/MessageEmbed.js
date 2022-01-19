@@ -1,5 +1,5 @@
-module.exports = (extendables) => {
-	extendables.extend_indexCache(`MessageEmbed`, ExtendableMessageEmbed => {
+module.exports = extendables => {
+	extendables.extend(`MessageEmbed`, ExtendableMessageEmbed => {
 		class MessageEmbed extends ExtendableMessageEmbed {
 			// <MessageEmbed>.setAuthor
 			setAuthor(options, iconURL, url) {

@@ -104,5 +104,5 @@ dist
 
 # Custom files
 .replit
-src--DEPRECATED/
+OLD/
 test/

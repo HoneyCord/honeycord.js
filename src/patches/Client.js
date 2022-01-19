@@ -1,11 +1,7 @@
-module.exports = (extendables) => {
-	extendables.extend_indexCache(`Client`, ExtendableClient => {
+module.exports = extendables => {
+	extendables.extend(`Client`, ExtendableClient => {
 		class Client extends ExtendableClient {
-			constructor() {
-				if(!options || typeof options !== `object`) {
-					var options = {};
-				}
-
+			constructor(options={}) {
 				if(!options.intents) {
 					options.intents = [
 						extendables.Discord.Intents.FLAGS.DIRECT_MESSAGES,
@@ -16,7 +12,7 @@ module.exports = (extendables) => {
 
 				return super(options);
 			}
-		};
+		}
 
 		return Client;
 	});
