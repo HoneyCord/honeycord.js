@@ -1,8 +1,10 @@
 module.exports = (options) => {
+	/*
 	// Check Node.js version
 	if(parseFloat(process.version.slice(1)) < 16.9) {
 		throw new Error(`[HoneyCord.js] For running HoneyCord.js, it is required to have Node.js 16.9 or newer.`);
 	}
+	*/
 
 	// Require
 	var fs = require(`fs`),
