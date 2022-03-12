@@ -97,7 +97,7 @@ interaction.reply(embed);
 
 Connecting to a voice channel:
 ```js
-message.channel.join()
+channel.join()
 	.then(() => {
 		console.log("Hey! I'm connected right now.");
 	});
