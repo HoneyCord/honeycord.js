@@ -1,18 +1,16 @@
 {
   "name": "honeycord.js",
-  "version": "0.8.1-alpha",
+  "version": "1.0.0-alpha",
   "description": "HoneyCord.js is an extension that facilitates the development of bots on top of Discord.js.",
   "main": "index.js",
   "dependencies": {
     "discord.js": "^13.0.0"
   },
   "devDependencies": {
-    "@discordjs/voice": "^0.7.5",
-    "node": "^17.3.0",
-    "npm": "^8.3.0"
+    "@discordjs/voice": "^0.7.5"
   },
   "engines": {
-    "node": ">=16.9.0"
+    "node": ">=14.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
