@@ -48,17 +48,59 @@ const client = new Client();
 
 Send an embed through a Text Channel without specifying the Array of embeds:
 ```js
-client.on('messageCreate', async message => {
-  if (message.author.bot) return;
+const embed = new MessageEmbed()
+	.setColor('RANDOM')
+	.setAuthor(message.author.username, message.author.displayAvatarURL());
 
-  if (message.startsWith('ping')) {
-		const embed = new MessageEmbed()
-			.setColor('RANDOM')
-			.setAuthor(message.author.username, message.author.displayAvatarURL());
-		
-		await message.channel.send(embed);
-  }
+message.channel.send(embed);
+```
+
+Reply a message with an embed:
+```js
+const embed = new MessageEmbed()
+	.setColor('RANDOM')
+	.setAuthor(message.author.username, message.author.displayAvatarURL());
+
+message.reply(embed);
+```
+
+Delete a message with certain timeout:
+```js
+message.delete(5_000)
+	.then(() => {
+		console.log('Message deleted!');
+	})
+```
+
+Split a message with code and embed:
+```js
+const embed = new MessageEmbed()
+	.setColor('RANDOM')
+	.setFooter('Enjoy this.');
+
+message.reply('This should be cut off at 40 characters.\nNo?', embed, {
+	code: 'txt',
+	split: {
+		maxLength: 40,
+	},
 });
+```
+
+Replying to a command interaction:
+```js
+const embed = new MessageEmbed()
+	.setColor('RANDOM')
+	.setAuthor(message.author.username, message.author.displayAvatarURL());
+
+interaction.reply(embed);
+```
+
+Connecting to a voice channel:
+```js
+message.channel.join()
+	.then(() => {
+		console.log("Hey! I'm connected right now.");
+	});
 ```
 
 ## Frequently Asked Questions
@@ -90,7 +132,7 @@ Make sure HoneyCord.js is required **and executed** before any `require("discord
 
 Before creating an issue, please ensure that it hasn't already been reported/suggested.
 
-## Help
+## Help / Report-a-bug
 
 If you don't understand something in the documentation, you are experiencing problems, or you just need a gentle
 nudge in the right direction, please don't hesitate to join our [honeycord.js Server](https://honeycord.rivest.tk/discord).
