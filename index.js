@@ -1,1 +1,1 @@
-module.exports = require(`${__dirname}/src/index.js`);
+module.exports = require(require(`path`).join(__dirname, `src`, `index.js`));
