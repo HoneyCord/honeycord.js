@@ -129,6 +129,10 @@ If you don't like this module and/or don't want to use it, just don't use it (al
 I found it too annoying to have to specify several properties just to send a couple of embeds and buttons, so I said to myself, "what if I make a module that makes the work a bit easier?"
 And that's how HoneyCord.js was born :D
 
+#### Do you plan on adding support for X thing?
+Maybe yes, maybe no, maybe I hadn't even thought about it.
+Remember you can join our [official server](https://honeycord.rivest.tk/discord) to find out about these things! ^w^
+
 ## Links
 
 - [***Dis***cord.js Website](https://discord.js.org/) ([source](https://github.com/discordjs/website))
