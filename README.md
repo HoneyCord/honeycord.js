@@ -121,6 +121,13 @@ HoneyCord.js does not plan to compete in any way against Discord.js, and in fact
 #### I have HoneyCord.js and it still won't let me send Embeds directly!
 Make sure HoneyCord.js is required **and executed** before any `require("discord.js")`, also make sure you have it installed!
 
+#### I don't like this module because for X reason Discord.js must have removed X thing and blah blah blah...
+**I don't mind :)**
+If you don't like this module and/or don't want to use it, just don't use it (also don't come and tell us about your opinion on our Discord server, it's not for that).
+
+#### Motivations?
+I found it too annoying to have to specify several properties just to send a couple of embeds and buttons, so I said to myself, "what if I make a module that makes the work a bit easier?"
+And that's how HoneyCord.js was born :D
 
 ## Links
 
