@@ -103,6 +103,11 @@ channel.join()
 	});
 ```
 
+Get the user's banner (even if the user does not have one):
+```js
+user.displayBannerURL()
+```
+
 ## Frequently Asked Questions
 
 #### What does this package do?
